@@ -3,11 +3,8 @@ package com.example.documentFlow.document.endpoint;
 import com.example.documentFlow.document.dto.DocumentDto;
 import com.example.documentFlow.document.dto.RequestDocument;
 import com.example.documentFlow.document.dto.RequestSendDocument;
-import com.example.documentFlow.document.model.Document;
-
 
 import java.util.List;
-
 
 public interface DocumentEndpoint {
 

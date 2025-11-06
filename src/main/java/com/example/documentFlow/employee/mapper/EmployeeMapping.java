@@ -7,6 +7,6 @@ import com.example.documentFlow.employee.model.Employee;
 public interface EmployeeMapping {
 
     Employee createUser(SignUpRequest request);
-    EmployeeDto toDto(Employee employee);
 
+    EmployeeDto toDto(Employee employee);
 }

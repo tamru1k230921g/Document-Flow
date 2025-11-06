@@ -1,6 +1,5 @@
 package com.example.documentFlow.documentHistory.service.impl;
 
-import com.example.documentFlow.document.model.Document;
 import com.example.documentFlow.documentHistory.model.DocumentHistory;
 import com.example.documentFlow.documentHistory.repository.DocumentHistoryRepository;
 import com.example.documentFlow.documentHistory.service.DocumentHistoryService;
@@ -14,14 +13,14 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@FieldDefaults(makeFinal = true,level = AccessLevel.PRIVATE)
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class DocumentHistoryServiceImpl implements DocumentHistoryService {
 
     DocumentHistoryRepository repository;
 
     @Override
     @Transactional
-    public DocumentHistory save(DocumentHistory document){
+    public DocumentHistory save(DocumentHistory document) {
         return repository.save(document);
     }
 

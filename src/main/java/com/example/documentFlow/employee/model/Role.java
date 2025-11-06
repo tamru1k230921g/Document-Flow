@@ -3,6 +3,7 @@ package com.example.documentFlow.employee.model;
 import java.util.Objects;
 
 public enum Role {
+
     USER,
     ADMIN,
     HR,

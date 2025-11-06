@@ -19,7 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping(Paths.DOCUMENT)
 @RequiredArgsConstructor
-@FieldDefaults(makeFinal = true,level = AccessLevel.PRIVATE)
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @Tag(name = "История документа")
 @SecurityRequirement(name = "JWT")
 public class DocumentHistoryController {
@@ -28,10 +28,7 @@ public class DocumentHistoryController {
 
     @Operation(summary = "Получить историю документа")
     @GetMapping("/{documentId}")
-    public List<DocumentHistoryDto> getHistories(@PathVariable("documentId") Long documentId){
+    public List<DocumentHistoryDto> getHistories(@PathVariable("documentId") Long documentId) {
         return endpoint.getHistories(documentId);
     }
-        
-
-
 }

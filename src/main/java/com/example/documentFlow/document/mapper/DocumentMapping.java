@@ -22,5 +22,4 @@ public interface DocumentMapping {
     void sendDocument(Document document, Employee employee);
 
     void unzipping(Document document);
-
 }

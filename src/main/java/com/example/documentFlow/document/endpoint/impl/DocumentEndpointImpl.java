@@ -21,10 +21,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Objects;
 
-
 @Service
 @RequiredArgsConstructor
-@FieldDefaults(makeFinal = true,level = AccessLevel.PRIVATE)
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class DocumentEndpointImpl implements DocumentEndpoint {
 
     EmployeeProvider currentlyEmployee;
@@ -42,6 +41,7 @@ public class DocumentEndpointImpl implements DocumentEndpoint {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<DocumentDto> getArchiveDocuments() {
         Long employeeId = currentlyEmployee.getCurrentUser().getId();
         List<Document> response = service.getAllDocumentsByOwner(employeeId, Status.ARCHIVED);
@@ -51,7 +51,7 @@ public class DocumentEndpointImpl implements DocumentEndpoint {
     @Override
     @Transactional
     public DocumentDto createDocument(RequestDocument request) {
-        Document document = mapping.create(request,currentlyEmployee.getCurrentUser());
+        Document document = mapping.create(request, currentlyEmployee.getCurrentUser());
         service.save(document);
         historyEndpoint.create(document);
         return mapping.toDto(document);
@@ -59,7 +59,7 @@ public class DocumentEndpointImpl implements DocumentEndpoint {
 
     @Override
     @Transactional
-    public DocumentDto updateDocument(Long documentId,RequestDocument request) {
+    public DocumentDto updateDocument(Long documentId, RequestDocument request) {
         Document document = service.getOwnerDocument(documentId, Status.ACTIVE);
         mapping.update(document, request);
         historyEndpoint.create(document);
@@ -72,31 +72,28 @@ public class DocumentEndpointImpl implements DocumentEndpoint {
     public DocumentDto archiveDocument(Long documentId) {
         Document document = service.getOwnerDocument(documentId, Status.ACTIVE);
         Long employeeId = currentlyEmployee.getCurrentUser().getId();
-        mapping.archiveDocument(document,employeeId);
+        mapping.archiveDocument(document, employeeId);
         historyEndpoint.create(document);
         service.save(document);
-        return mapping.toDto(document) ;
+        return mapping.toDto(document);
     }
 
     @Override
     @Transactional
-    public DocumentDto sendDocument(Long documentId, RequestSendDocument employeeId){
+    public DocumentDto sendDocument(Long documentId, RequestSendDocument employeeId) {
         Employee employee = employeeService.getOneEmployee(employeeId.getTargetEmployeeId());
-        if( Objects.equals(employee, currentlyEmployee.getCurrentUser()) )
-        {
+        if (Objects.equals(employee, currentlyEmployee.getCurrentUser()))
             throw new RuntimeException("Вы не можете отправить самому себе!");
-        }
-        else
-        {
-            Document document = service.getOwnerDocument(documentId, Status.ACTIVE);
-            mapping.sendDocument(document,employee);
-            historyEndpoint.create(document);
-            service.save(document);
-            return mapping.toDto(document);
-        }
+
+        Document document = service.getOwnerDocument(documentId, Status.ACTIVE);
+        mapping.sendDocument(document, employee);
+        historyEndpoint.create(document);
+        service.save(document);
+        return mapping.toDto(document);
     }
 
     @Override
+    @Transactional
     public void checkChoose(Long documentId) {
         Document document = service.getOneDocument(documentId, Status.ARCHIVED);
         mapping.unzipping(document);

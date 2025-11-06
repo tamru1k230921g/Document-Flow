@@ -21,8 +21,9 @@ public class DocumentServiceImpl implements DocumentService {
     DocumentRepository repository;
     EmployeeProvider currentlyEmployee;
 
+    @Override
     @Transactional
-    public Document save(Document document){
+    public Document save(Document document) {
         return repository.save(document);
     }
 
@@ -43,10 +44,11 @@ public class DocumentServiceImpl implements DocumentService {
                         new RuntimeException("Документ с id: " + documentId + " не найден или не доступен"));
     }
 
+    @Override
     @Transactional(readOnly = true)
-    public List<Document> getAllDocumentsByOwner(Long employeeId, Status statusDocument){
+    public List<Document> getAllDocumentsByOwner(Long employeeId, Status statusDocument) {
         return repository.findAllDocumentByOwnerIdAndStatus(employeeId, statusDocument)
                 .orElseThrow(() ->
                         new RuntimeException("Документы пользователя с  id: " + employeeId + " не найдены или не доступны"));
     }
-    }
+}

@@ -30,14 +30,14 @@ public class RequestArchivistController {
     @PostMapping("/send/{documentId}")
     @PreAuthorize("hasRole('HEAD')")
     public RequestArchivistDto sendRequest(@PathVariable("documentId") Long documentId,
-                                           @RequestBody RequestSendDto requestDto){
+                                           @RequestBody RequestSendDto requestDto) {
         return endpoint.createRequest(documentId, requestDto);
     }
 
     @Operation(summary = "Получить все запросы (только ARCHIVIST)")
     @GetMapping
     @PreAuthorize("hasRole('ARCHIVIST')")
-    public List<RequestArchivistDto> getRequests(){
+    public List<RequestArchivistDto> getRequests() {
         return endpoint.getRequests();
     }
 
@@ -45,8 +45,8 @@ public class RequestArchivistController {
     @PostMapping("/{requestId}")
     @PreAuthorize("hasRole('ARCHIVIST')")
     public RequestArchivistDto updateRequest(@PathVariable("requestId") Long requestId,
-                                             @RequestBody RequestUpdateDto requestUpdate){
-        return endpoint.updateRequest(requestId,requestUpdate);
+                                             @RequestBody RequestUpdateDto requestUpdate) {
+        return endpoint.updateRequest(requestId, requestUpdate);
     }
 
 }

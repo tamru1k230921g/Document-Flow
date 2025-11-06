@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class DocumentMappingImpl implements DocumentMapping {
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public DocumentDto toDto(Document entity) {
         DocumentDto dto = new DocumentDto();
         dto.setDocumentName(entity.getDocumentName());
@@ -31,7 +31,7 @@ public class DocumentMappingImpl implements DocumentMapping {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<DocumentDto> toDtos(List<Document> entities) {
         return entities.stream()
                 .map(this::toDto)
@@ -39,7 +39,7 @@ public class DocumentMappingImpl implements DocumentMapping {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public Document create(RequestDocument dto, Employee employee) {
         Document document = new Document();
         document.setDescription(dto.getDescription());
@@ -52,7 +52,7 @@ public class DocumentMappingImpl implements DocumentMapping {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public void update(Document document, RequestDocument dto) {
         document.setDescription(dto.getDescription());
         document.setDocumentName(dto.getDocumentName());
@@ -61,7 +61,7 @@ public class DocumentMappingImpl implements DocumentMapping {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public void archiveDocument(Document document, Long employeeId) {
         document.setStatus(Status.ARCHIVED);
         document.setDeletedAt(LocalDateTime.now());
@@ -70,15 +70,14 @@ public class DocumentMappingImpl implements DocumentMapping {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public void sendDocument(Document document, Employee employee) {
         document.setOwner(employee);
         document.setDocumentAction(DocumentAction.SEND);
     }
 
-
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public void unzipping(Document document) {
         document.setStatus(Status.ACTIVE);
         document.setDocumentAction(DocumentAction.UNZIPPING);

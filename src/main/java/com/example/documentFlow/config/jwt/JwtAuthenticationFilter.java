@@ -50,27 +50,27 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         var username = jwtService.extractUserName(jwt);
 
         if (StringUtils.isNotEmpty(username) && SecurityContextHolder
-                                                    .getContext()
-                                                    .getAuthentication() == null) {
+                .getContext()
+                .getAuthentication() == null) {
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
             if (jwtService.isTokenValid(jwt, userDetails)) {
                 SecurityContext context = SecurityContextHolder
-                                            .createEmptyContext();
+                        .createEmptyContext();
 
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userDetails,
-                        null,// уже была проверка
-                        userDetails.getAuthorities()//роли и права
+                        null,
+                        userDetails.getAuthorities()
 
                 );
 
                 authToken.setDetails(new WebAuthenticationDetailsSource()
-                                            .buildDetails(request));//доп инфа
+                        .buildDetails(request));
                 context.setAuthentication(authToken);
-                SecurityContextHolder.setContext(context);//теперь мы авторзованны
+                SecurityContextHolder.setContext(context);
             }
         }
-        filterChain.doFilter(request, response);//передает дальше по цепочке
+        filterChain.doFilter(request, response);
     }
 }

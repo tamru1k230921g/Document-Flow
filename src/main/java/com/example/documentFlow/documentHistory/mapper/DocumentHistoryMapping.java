@@ -1,6 +1,5 @@
 package com.example.documentFlow.documentHistory.mapper;
 
-import com.example.documentFlow.document.dto.DocumentDto;
 import com.example.documentFlow.document.model.Document;
 import com.example.documentFlow.documentHistory.dto.DocumentHistoryDto;
 import com.example.documentFlow.documentHistory.model.DocumentHistory;

@@ -1,13 +1,9 @@
 package com.example.documentFlow.document.model;
 
-import com.example.documentFlow.core.base.AuditedEntity;
 import com.example.documentFlow.core.base.RemovalEntity;
 import com.example.documentFlow.employee.model.Employee;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Builder

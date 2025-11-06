@@ -4,8 +4,6 @@ import com.example.documentFlow.document.model.DocumentAction;
 import com.example.documentFlow.document.model.Status;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 @Data
 public class DocumentHistoryDto {
 

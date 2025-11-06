@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class RequestArchivistMappingImpl implements RequestArchivistMapping {
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public RequestArchivistDto toDto(RequestArchivist requestArchivist) {
         RequestArchivistDto dto = new RequestArchivistDto();
         dto.setRequestMessage(requestArchivist.getRequestMessage());
@@ -28,7 +28,7 @@ public class RequestArchivistMappingImpl implements RequestArchivistMapping {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<RequestArchivistDto> toDtos(List<RequestArchivist> entities) {
         return entities.stream()
                 .map(this::toDto)
@@ -36,7 +36,7 @@ public class RequestArchivistMappingImpl implements RequestArchivistMapping {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public RequestArchivist createRequest(Document document, RequestSendDto requestDto) {
         RequestArchivist request = new RequestArchivist();
         request.setRequestMessage(requestDto.getRequestMessage());
@@ -47,7 +47,7 @@ public class RequestArchivistMappingImpl implements RequestArchivistMapping {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public RequestArchivist updateRequest(RequestArchivist request, RequestUpdateDto requestUpdate) {
         request.setRequestStatus(requestUpdate.getStatus());
         return request;

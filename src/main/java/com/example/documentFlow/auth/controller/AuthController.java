@@ -2,7 +2,6 @@ package com.example.documentFlow.auth.controller;
 import com.example.documentFlow.auth.dto.JwtAuthenticationResponse;
 import com.example.documentFlow.auth.dto.SignInRequest;
 import com.example.documentFlow.auth.endpoint.AuthEndpoint;
-import com.example.documentFlow.auth.service.AuthenticationService;
 import com.example.documentFlow.util.Paths;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

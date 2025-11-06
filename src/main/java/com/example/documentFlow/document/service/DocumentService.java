@@ -5,7 +5,6 @@ import com.example.documentFlow.document.model.Status;
 
 import java.util.List;
 
-
 public interface DocumentService {
 
     Document save(Document documentId);
@@ -15,5 +14,4 @@ public interface DocumentService {
     Document getOwnerDocument(Long documentId, Status documentStatus);
 
     List<Document> getAllDocumentsByOwner(Long employeeId, Status statusDocument);
-
 }

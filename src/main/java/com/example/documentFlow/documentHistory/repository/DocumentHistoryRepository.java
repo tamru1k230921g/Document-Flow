@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository//
-public interface DocumentHistoryRepository extends JpaRepository<DocumentHistory,Long> {
+@Repository
+public interface DocumentHistoryRepository extends JpaRepository<DocumentHistory, Long> {
 
     List<DocumentHistory> findAllByDocumentId(Long documentId);
 

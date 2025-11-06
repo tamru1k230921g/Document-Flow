@@ -28,44 +28,40 @@ public class DocumentController {
 
     @Operation(summary = " Получение всех активных документов пользователя")
     @GetMapping("/active")
-    public List<DocumentDto> getActiveDocuments(){
+    public List<DocumentDto> getActiveDocuments() {
         return endpoint.getDocumentsForEmployee();
     }
 
     @Operation(summary = " Получение всех заархивированных документов пользователя")
     @GetMapping("/archive")
-    public List<DocumentDto> getArchiveDocuments(){
+    public List<DocumentDto> getArchiveDocuments() {
         return endpoint.getArchiveDocuments();
     }
 
     @Operation(summary = "Создание документа")
     @PostMapping
-    public DocumentDto create(@RequestBody RequestDocument document){
+    public DocumentDto create(@RequestBody RequestDocument document) {
         return endpoint.createDocument(document);
     }
 
     @Operation(summary = "Изменение документа")
     @PutMapping("/{documentId}")
     public DocumentDto update(@RequestBody RequestDocument document,
-                              @PathVariable("documentId") Long documentId
-    )
-    {
+                              @PathVariable("documentId") Long documentId) {
         return endpoint.updateDocument(documentId, document);
     }
 
     @Operation(summary = "Архивация документа (только HEAD)")
     @PostMapping("/{documentId}")
     @PreAuthorize("hasRole('HEAD')")
-    public DocumentDto archiveDocument(@PathVariable("documentId") Long documentId){
+    public DocumentDto archiveDocument(@PathVariable("documentId") Long documentId) {
         return endpoint.archiveDocument(documentId);
     }
 
     @Operation(summary = "Отправка документа")
     @PostMapping("/send/{documentId}")
     public DocumentDto sendDocument(@RequestBody RequestSendDocument targetEmployeeId,
-                                    @PathVariable("documentId") Long documentId
-    )
-    {
+                                    @PathVariable("documentId") Long documentId) {
         return endpoint.sendDocument(documentId, targetEmployeeId);
     }
 

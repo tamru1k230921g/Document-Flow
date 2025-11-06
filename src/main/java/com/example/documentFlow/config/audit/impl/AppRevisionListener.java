@@ -12,13 +12,12 @@ public class AppRevisionListener implements RevisionListener {
         if (SecurityContextHolder.getContext() == null ||
                 SecurityContextHolder.getContext().getAuthentication() == null ||
                 SecurityContextHolder.getContext().getAuthentication().getPrincipal() == null ||
-                !(SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof Employee)) {
+                !(SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof Employee user)) {
             return;
         }
 
         RevEntity revision = (RevEntity) revisionEntity;
 
-        Employee user = (Employee) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         revision.setAuditor(user);
     }
 }

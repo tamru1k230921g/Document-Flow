@@ -13,13 +13,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @RequiredArgsConstructor
-@FieldDefaults(makeFinal = true,level = AccessLevel.PRIVATE)
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class EmployeeMappingImpl implements EmployeeMapping {
 
     PasswordEncoder passwordEncoder;
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public Employee createUser(SignUpRequest request) {
         return Employee.builder()
                 .username(request.getUsername().toLowerCase())
@@ -30,6 +30,7 @@ public class EmployeeMappingImpl implements EmployeeMapping {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public EmployeeDto toDto(Employee employee) {
         EmployeeDto dto = new EmployeeDto();
         dto.setUsername(employee.getUsername());

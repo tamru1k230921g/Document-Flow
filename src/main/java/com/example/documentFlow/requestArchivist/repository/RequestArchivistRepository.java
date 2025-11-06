@@ -5,8 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RequestArchivistRepository extends JpaRepository<RequestArchivist,Long> {
+public interface RequestArchivistRepository extends JpaRepository<RequestArchivist, Long> {
 
-    RequestArchivist findByDocumentId(Long documentId);
 
 }

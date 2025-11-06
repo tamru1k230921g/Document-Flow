@@ -21,7 +21,6 @@ public class RequestArchivistServiceImpl implements RequestArchivistService {
     @Override
     @Transactional(readOnly = true)
     public List<RequestArchivist> getRequests() {
-
         return repository.findAll();
     }
 
@@ -37,7 +36,6 @@ public class RequestArchivistServiceImpl implements RequestArchivistService {
     @Override
     @Transactional
     public RequestArchivist save(RequestArchivist requestArchivist) {
-
         return repository.save(requestArchivist);
     }
 }

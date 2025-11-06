@@ -1,6 +1,5 @@
 package com.example.documentFlow.requestArchivist.service;
 
-import com.example.documentFlow.requestArchivist.dto.RequestUpdateDto;
 import com.example.documentFlow.requestArchivist.model.RequestArchivist;
 
 import java.util.List;

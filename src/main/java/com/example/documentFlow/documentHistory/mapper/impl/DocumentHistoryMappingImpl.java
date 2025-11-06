@@ -1,6 +1,5 @@
 package com.example.documentFlow.documentHistory.mapper.impl;
 
-import com.example.documentFlow.document.dto.DocumentDto;
 import com.example.documentFlow.document.model.Document;
 import com.example.documentFlow.documentHistory.dto.DocumentHistoryDto;
 import com.example.documentFlow.documentHistory.mapper.DocumentHistoryMapping;
@@ -15,7 +14,7 @@ import java.util.stream.Collectors;
 public class DocumentHistoryMappingImpl implements DocumentHistoryMapping {
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public DocumentHistory create(Document document) {
         DocumentHistory documentHistory = new DocumentHistory();
         documentHistory.setOwner(document.getOwner());
@@ -32,6 +31,7 @@ public class DocumentHistoryMappingImpl implements DocumentHistoryMapping {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public DocumentHistoryDto toDto(DocumentHistory document) {
         DocumentHistoryDto dto = new DocumentHistoryDto();
         dto.setDocumentId(document.getId());
@@ -45,6 +45,7 @@ public class DocumentHistoryMappingImpl implements DocumentHistoryMapping {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<DocumentHistoryDto> toDtos(List<DocumentHistory> document) {
         return document.stream()
                 .map(this::toDto)

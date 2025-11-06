@@ -28,6 +28,4 @@ public class EmployeeController {
     public EmployeeDto signUp(@RequestBody @Valid SignUpRequest request) {
         return employeeEndpoint.signUp(request);
     }
-
-
 }
